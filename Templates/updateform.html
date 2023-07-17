@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div class="row">
+    <div class="col-5 offset-3">
+        <form method="post" id="formdat" >
+            {%csrf_token%}
+            {{form.as_p}}
+        </form>
+        <button class="btn btn-success px-4" type="submit" id="submitbtn">save</button>
+        <a href="{%url 'attendancelist'%}"><button class="btn btn-warning" type="button">cancel</button></a> 
+    </div>
+</div>
+<script>
+    var submitb=document.getElementById('submitbtn')
+    var formd=document.getElementById('formdat')
+
+    submitb.onclick = function(){
+        formd.submit()
+    }
+
+</script>
+{%endblock content%}

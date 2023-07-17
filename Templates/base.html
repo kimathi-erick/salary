@@ -1,0 +1,48 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{%url 'attendancelist'%}"><h3>Erick's_Company</h3></a>
+        
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{%url 'attendancelist'%}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'workerslist'%}">Employees</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'salaryview'%}">Pending_payments</a>
+            </li>
+            
+          </ul>
+          <form class="form-inline my-2 my-lg-0" method="get" action="{%url 'searchbar'%}">
+            <input class="form-control mr-sm-2" type="text" name="query" placeholder="Search  by first name">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'logout'%}">Logout</a>
+            </li>
+          </ul>
+          
+        </div>
+    </nav>
+    <div class="container-fluid"> 
+         
+        {%block content%}
+        
+        {%endblock content%}   
+    </div>
+</body>
+</html>

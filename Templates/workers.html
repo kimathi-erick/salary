@@ -1,0 +1,61 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div class="row py-2">
+    <div class="col-2"><button class="btn btn-primary" type="button" id="addemployee">Add_Employee</button></div>   
+</div>
+<div class="row">
+    <div class="col" id="table">
+        <table class="table table-striped" >
+        <tr class="table-success"><th>First Name</th><th>Second Name</th><th>Gender</th>
+            <th>ID_Number</th><th>Phone_Number</th><th>Delete</th></tr>
+        {%for worker in workers%}
+        <tr><td>{{worker.First_Name}}</td><td>{{worker.Middle_Name}}</td><td>{{worker.Gender}}</td>
+            <td>{{worker.Id_Number}}</td><td>{{worker.Phone}}</td>
+            <td><a href="{%url 'deleteworker' worker.id%}"><button class="btn btn-outline-danger">X</button></a></td>
+        </tr>
+        {%endfor%}
+        </table>
+    </div>
+    
+    
+    <div class="col-5 offset-3" id="addemployeeform" style="display: none;">
+        <form class="form" method="post" id="formdata" >
+        {%csrf_token%}
+        {{form.as_p}}
+        </form>
+        <button class="btn btn-success d-inline-block px-4 " type="submit" id="submitbtn">save</button>
+        <button class="btn btn-warning d-inline-block offset-2" type="button"  id="close" >cancel</button>
+
+    </div>  
+</div>
+<script>
+    var button = document.getElementById("addemployee")
+    var buttonclose = document.getElementById("close")
+    var submitbutton = document.getElementById("submitbtn")
+    var formdiv = document.getElementById("addemployeeform")
+    var list = document.getElementById("table")
+    var form = document.getElementById("formdata")
+
+    button.onclick = function(){
+        formdiv.style.display = "block";
+        list.style.display = "none";
+        button.style.display = "none"
+    }
+
+    document.forms[0].onsubmit = function(){
+        formdiv.style.display = "none";
+        list.style.display = "block";
+        button.style.display = "block"
+    }
+    buttonclose.onclick = function(){
+        formdiv.style.display = "none";
+        list.style.display = "block"
+        button.style.display = "block"
+    }
+    submitbutton.onclick = function(){
+        form.submit()
+    }
+
+</script>
+{%endblock content%}

@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div class="row">
+    <div class="col">
+        <table class="table">
+            <tr class="table-success"><th>First Name</th><th>Second Name</th><th>Gender</th>
+                <th>ID_Number</th><th>Phone_Number</th><th>Pending_payments</th><th>Delete</th></tr></tr>
+                {%for worker in workers%}
+                <tr><td>{{worker.First_Name}}</td><td>{{worker.Middle_Name}}</td><td>{{worker.Gender}}</td>
+                    <td>{{worker.Id_Number}}</td><td>{{worker.Phone}}</td><td>{{worker.pending_payments}}<td><a href="{%url 'deleteworker' worker.id%}"> <span class="badge badge-danger p-2">delete</span></a></td>
+                </tr>
+                {%endfor%}
+        </table>
+    </div>
+</div>
+
+{%endblock content%}

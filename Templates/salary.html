@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div class="row">
+    <div class="col">
+        <table class="table table-bordered table-hover table-primary">
+            <tr class="table-warning"><th>Name</th><th>Id_Number</th><th>Amount_Payable</th></tr>
+            {%for attendance in attendances%}
+            <tr><td>{{attendance.First_Name}} {{attendance.Middle_Name}}</td>
+                <td> {{attendance.Id_Number}}</td>
+                <td>$ {{attendance.pending_payments}}.00</td>
+            </tr>
+            {%endfor%}
+            <tr class="table-danger">
+                <th>Total Payables</th>
+                <td>-----------</td>
+                <th>$ {{p}}.00</th>
+            </tr>
+        </table>
+
+    </div>
+</div>
+{%endblock content%}

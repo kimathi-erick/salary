@@ -1,0 +1,84 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div class="row p-2">
+    <div class="col">
+        <button class="btn btn-primary" id="attendance">Add_Attendance</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col" id="attendancetable">
+        <table class="table table-bordered table-striped" >
+            <tr><th>Date</th><th>Name</th><th>Present_Status</th><th>Pay_Amount</th>
+                <th>Pay_Status</th><th>Delete</th></tr>
+            {%for attendance in attendances%}
+            <tr><td>{{attendance.date}}</td>
+                <td><a href="{%url 'updateattendance' attendance.id%}">{{attendance.name}}</a></td>
+                {%if attendance.presentstatus == 'Present'%}
+                <td><span class="badge badge-info p-2">{{attendance.presentstatus}}</span></td>
+                {%else %}
+                <td><span class="badge badge-secondary p-2">{{attendance.presentstatus}}</span></td>
+                {%endif%}
+                <td>{{attendance.salary}}</td>
+                {%if attendance.paystatus == 'Pending'%}
+                <td><span class="badge badge-warning py-2 px-4">{{attendance.paystatus}}</span></td>
+                {%elif attendance.paystatus == 'Paid'%}
+                <td><span class="badge badge-success px-4 py-2 ">{{attendance.paystatus}}</span></td>
+                {%else%}
+                <td><span class="badge badge-danger py-2 px-4">{{attendance.paystatus}}</span></td>
+                {%endif%}
+                <td><a href="{%url 'deleteattendance' attendance.id%}"><h5><span class="badge badge-danger">X</span></h5></a></td>
+                </tr>
+            {%endfor%}  
+        </table>
+    </div>
+    
+</div>
+<div class="row">
+    <div class="col-5 offset-3" id="myform" style="display: none;">
+        <form method="post" id="formdata" >
+            {%csrf_token%}
+            {{form.as_p}}
+        </form>
+        <button class="btn btn-success px-4" type="submit" id="submitbtn">save</button>
+        <button class="btn btn-warning" type="button" id="cancelbtn">cancel</button> 
+    </div>
+
+</div>
+           
+<script>
+    var attendancebtn=document.getElementById('attendance')
+    var sform=document.getElementById('myform')
+    var submitformbtn=document.getElementById('submitbtn')
+    var cancelformbtn=document.getElementById('cancelbtn')
+    var table=document.getElementById('attendancetable')
+    var form = document.getElementById("formdata")
+
+
+    attendancebtn.onclick = function(){
+        table.style.display = "none";
+        sform.style.display = "block";
+        attendancebtn.style.display = "none"
+
+    }
+    document.forms[0].onsubmit = function(){
+        table.style.display = "block";
+        tform.style.display = "none";
+
+    }
+    submitformbtn.onclick = function(){
+        form.submit()
+        table.style.display = "block";
+        tform.style.display = "none";
+
+    }
+    cancelformbtn.onclick = function(){
+        table.style.display = "block";
+        sform.style.display = "none";
+        attendancebtn.style.display = "block"
+
+    }
+
+</script>
+
+{%endblock content%}
